@@ -12,7 +12,7 @@ def home(request):
 
 def city_index(request):
     cities = City.objects.all()
-    return render(request, 'city/index.html', {'cities': cities})
+    return render(request, 'city/city_base.html', {'cities': cities})
 
 def city_detail(request, city_id):
     city = City.objects.get(id = city_id)
