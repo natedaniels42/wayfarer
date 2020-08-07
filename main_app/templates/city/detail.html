@@ -27,7 +27,7 @@
 {% for post in posts %}
 <div class="box row p-1 m-3">
   <a href="{% url 'post_detail' post.id %}">
-    <img  class="m-3" src="{{ profile.image }}">
+    <img  class="m-3" src="{{ post.profile.image }}">
     <div class="col">
       <h5 class="cityName m-3">{{post.title}}</h5>
       <p>{{post.content}}</p>

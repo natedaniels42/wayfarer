@@ -4,13 +4,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import ProfileForm, PostForm
 from .models import Profile, Post, City
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    context = {
-        'hidden': "hidden"
-    }
-    return render(request, 'home.html', context)
+    return render(request, 'home.html')
 
 def city_index(request):
     cities = City.objects.all()
@@ -29,14 +27,14 @@ def city_detail(request, city_id):
 def city_post(request):
     return render(request, 'city/post.html')
 
-def login(request):
+def login(request, user):
     form = AuthenticationForm()
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         if form.is_valid():
             user = request.user
             login(request, user)
-            return redirect(f'/profile/{user.id}', {'user': user})
+            return redirect('/profile/')
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
@@ -54,11 +52,10 @@ def signup(request):
         print(form)
         if form.is_valid():
             user = form.save()
-            login(request, user)
             profile = form2.save(commit=False)
             profile.user_id = user.id
             profile.save()
-            return redirect(f'/profile/{user.id}', { 'user': user, 'profile': profile } )
+            return redirect('/accounts/login/', {'profile': profile} )
         else:
             global error 
             error = 'User account already exists'
@@ -67,52 +64,44 @@ def signup(request):
         form = UserCreationForm()
         return render(request, 'registration/signup.html', {'form': form})
 
-def update(request, user_id):
-    profile = Profile.objects.get(user_id=user_id)
+@login_required
+def update(request):
+    profile = Profile.objects.get(user=request.user.id)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             profile = form.save()
-            return redirect(f'/profile/{profile.user_id}', {'profile': profile})
+            return redirect('profile')
         else:
             return redirect('home')
     else:
         form = ProfileForm(instance=profile)
-        return render(request, 'registration/update.html', {'form': form, 'profile': profile, 'user_id': user_id})
-# def update(request):
-#   if request.method == 'POST':
-#     name = request.POST['name']
-#     city = request.POST['breed']
-#     form = ProfileForm(request.POST)
-#     new_profile = form.save(commit=false)
-#     new_profile.user = request.user
-#     new_profile.save()
-#     return redirect('detail', new_profile.id)
-#   else:
-#     form = ProfileForm()
-#     return render(request, 'profile.html')
+        return render(request, 'registration/update.html', {'form': form, 'profile': profile})
 
-def profile(request, user_id):
-    profile = Profile.objects.get(user_id = user_id)
-    posts = Post.objects.filter(profile_id = profile.id)
-    print(profile.name)
-    return render(request, 'profile.html', {'user_id':user_id, 'profile':profile, 'posts': posts})
-
+@login_required
+def profile(request):
+    profile = Profile.objects.get(user = request.user.id)
+    posts = Post.objects.filter(profile = profile.id)
+    return render(request, 'profile.html', {'profile':profile, 'posts': posts})
+    
+@login_required
 def post_new(request, city_id):
-    city = City.objects.get(id=city_id)
+    city = City.objects.get(id = city_id)
+    profile = Profile.objects.get(user = request.user.id)
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.city_id = city_id
             post.save()
-            return redirect('city_index')
+            return redirect('/city/')
         else:
             return redirect('/post/new')
     else:
         form = PostForm()
-        return render(request, 'post_new.html', {'form': form, 'city': city, 'profile': profile})        
+        return render(request, 'post_new.html', {'form': form, 'city': city, 'profile': profile })        
 
+@login_required
 def post_edit(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method == 'POST':
@@ -125,20 +114,20 @@ def post_edit(request, post_id):
             return redirect('post_edit', post_id)
     else:
         form = PostForm()
-        return render(request, 'post_edit.html', {'form': form})
+        return render(request, 'post_edit.html', {'form': form, 'post': post})
 
 def post_detail(request, post_id):
     post = Post.objects.get(id = post_id)
-    profile = Profile.objects.get(id = post.profile_id)
-    city = City.objects.get(id = post.city_id)
+    profile = Profile.objects.get(id = post.profile.id)
+    city = City.objects.get(id = post.city.id)
     context = {
         'post': post,
         'profile': profile,
         'city': city,
-        'hidden': "hidden"
     }
     return render(request, 'post.html', context)
 
+@login_required
 def post_delete(request, post_id):
     Post.objects.get(id=post_id).delete()
     return redirect('city_index')

@@ -2,8 +2,22 @@
 {% block content %}
 <form method="POST">
   {% csrf_token %}
-  {{ form.as_p }}
   
+  <div class="box px-5 py-3">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" name="title" maxlength="200" required id="id_title" placeholder="{{post.title}}">
+    </div>
+    <div class="form-group">
+      <label for="id_content">Edit Post Here</label>
+      <input type="textarea" class="form-control" name="content" maxlength="1000" required id="id_content" placeholder="{{post.content}}">
+    </div>
+    <div class="form-group">
+      <input type="hidden"  name="profile" value="{{post.profile.id}}"/>
+    </div>
+    <div class="form-group">
+      <input type="hidden"  name="city" value="{{post.city.id}}"/>
+    </div>
   <div class="text-center">
     <button type="submit" class="btn btn-primary">Edit Post</button>
   </div>

@@ -10,14 +10,25 @@
         <div class="crop mx-auto">
           <img src="{{ profile.image }}" width="200">
         </div>
-        <p class="text-center"><small>Member since: {{ user.date_joined }}</small></p>
+        <p class="text-center"><small>Member since: {{ profile.user.date_joined }}</small></p>
         <div class="text-center">
-          <a  href="{% url 'update_profile' profile.user_id %}">
+          <a  href="{% url 'update_profile' %}">
             <button class="btn btn-primary mb-3">Update</button>
           </a>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <h3>Posts</h3>
+    </div>
+   {% for post in posts %}
+    <div class="box row p-1 m-3">
+      <a href="/post/{{ post.id }}">{{ post.title }}</a>
+    </div>
+    {% endfor %}
+  </div>
     
+</section>
       
     </div>
   </section>
