@@ -20,7 +20,6 @@ def city_detail(request, city_id):
     context = {
         'city': city,
         'posts': posts,
-
     }
     return render(request, 'city/detail.html', context)
 
@@ -130,4 +129,4 @@ def post_detail(request, post_id):
 @login_required
 def post_delete(request, post_id):
     Post.objects.get(id=post_id).delete()
-    return redirect('city_index')
+    return redirect('home')
