@@ -93,7 +93,7 @@ def post_new(request, city_id):
             post = form.save(commit=False)
             post.city_id = city_id
             post.save()
-            return redirect('/city/')
+            return redirect('city_detail', city.id)
         else:
             return redirect('/post/new')
     else:
@@ -128,5 +128,7 @@ def post_detail(request, post_id):
 
 @login_required
 def post_delete(request, post_id):
-    Post.objects.get(id=post_id).delete()
-    return redirect('home')
+    post = Post.objects.get(id=post_id)
+    city_id = post.city.id
+    post.delete()
+    return redirect('city_detail', city_id)

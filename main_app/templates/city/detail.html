@@ -26,8 +26,8 @@
 {% if posts.count %}
 {% for post in posts %}
 <div class="box row p-1 m-3">
-  <img  class="m-3" src="{{ post.profile.image }}"  width="80" height="80">
-  <a href="{% url 'post_detail' post.id %}">
+  <img  class="m-3" src="{{ post.profile.image }}" width="80" height="80">
+    <a href="{% url 'post_detail' post.id %}">
     <div class="col">
       <h5 class="cityName my-3">{{post.title}}</h5>
       <p>{{post.content}}</p>
