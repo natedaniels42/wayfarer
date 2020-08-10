@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h2 class="text-center m-4">My profile</h2>
   <section class="my-4">
     <div class="container col-md-offset-3 col-md-6">
 
       <div class="box">
-        <h2 class="text-center pt-2">{{ profile.name }}</h2>
+        <h1 class="text-center pt-2">{{ profile.name }}</h1>
         <h4 class="text-center">{{ profile.city }}</h4>
         <div class="crop mx-auto">
           <img src="{{ profile.image }}" width="200">
