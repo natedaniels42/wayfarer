@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from .forms import ProfileForm, PostForm
 from .models import Profile, Post, City
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 def home(request):
@@ -43,6 +46,13 @@ def signup(request):
             profile = form2.save(commit=False)
             profile.user_id = user.id
             profile.save()
+            send_mail(
+                'Welcome to Wayfarer',
+                'Welcome to Wayfarer. You email and profile have been confirmed.  Many journies await you!  There is nothing more that you need to do at the time. Build your profile and begin sharing you stories!  -Wayfarer Team',
+                settings.EMAIL_HOST_USER,
+                [profile.email],
+                fail_silently=False,
+            )
             return redirect('/profile/', {'profile': profile} )
         else:
             global error 
