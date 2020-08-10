@@ -19,7 +19,7 @@ def city_index(request):
 
 def city_detail(request, city_id):
     city = City.objects.get(id = city_id)
-    posts = Post.objects.filter(city_id = city.id)
+    posts = Post.objects.filter(city_id = city.id).order_by('-id')
     context = {
         'city': city,
         'posts': posts,
@@ -28,18 +28,6 @@ def city_detail(request, city_id):
 
 def city_post(request):
     return render(request, 'city/post.html')
-
-def login(request, user):
-    form = AuthenticationForm()
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            login(request, user)
-            return redirect('/profile/')
-    else:
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form': form})
 
 def signup(request):
     error_message = 'Error'
@@ -54,6 +42,7 @@ def signup(request):
         print(form)
         if form.is_valid():
             user = form.save()
+            login(request, user)
             profile = form2.save(commit=False)
             profile.user_id = user.id
             profile.save()
@@ -64,7 +53,7 @@ def signup(request):
                 [profile.email],
                 fail_silently=False,
             )
-            return redirect('/accounts/login/', {'profile': profile} )
+            return redirect('/profile/', {'profile': profile} )
         else:
             global error 
             error = 'User account already exists'
