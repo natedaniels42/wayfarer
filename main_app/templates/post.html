@@ -1,35 +1,57 @@
+
 {% extends 'base.html' %}
 {% block content %}
 
-<div id="popup-1">
-	<div class="popup-content">
-		<h1>Popup Title</h1>
-		<p>Are you sure you want to delete this post?</p>
-		<button><a href="{% url 'post_delete' post.id %}">Delete</a></button>
-		<button id="close-popup-1">Cancel</button>
-	</div>
-</div>
 
-<h1>Post Show Page</h1>
-<img src="{{ profile.image }}" width="40" height="40">
-<h2>{{ post.title }}</h2>
-<h3>Created by: {{ profile.name }}</h3>
-<p>{{ post.content }}</p>
-<a id="open-popup-1">Delete</a>
-<a href="{% url 'post_edit' post.id %}">Edit</a>
+
+<section id="post-section">
+	<div class="text-center my-4">
+		<h1>Post</h1>
+	</div>
+	<div class="container col-md-offset-3 col-md-6">
+		<div class="box text-center p-3">
+			
+			<img src="{{ profile.image }}" width="100" height="100">
+			<div class="mx-3 mb-1">
+				<span class="badge badge-pill badge-dark px-3">{{ post.city.name}}</span>
+			</div>
+			<h2>{{ post.title }}</h2>
+			<p>{{ post.content }}</p>
+			<p><small>Created by: {{ profile.name }}</small></p>
+			<a id="open-popup-1" class="mx-1">
+				<button class="grow btn btn-outline-danger">Delete</button>
+			</a>
+			<a href="{% url 'post_edit' post.id %}"  class="mx-1">
+				<button class="grow btn btn-outline-primary">Edit</button>
+			</a>
+		</div>
+	</div>
+</section>
+
+	<div id="popup-1">
+		<div class="popup-content">
+			<h1 id="red">Delete Post</h1>
+			<p>Are you sure you want to delete this post?</p>
+			<a href="{% url 'post_delete' post.id %}" class="mx-1">
+				<button class="grow btn btn-outline-danger">Delete</button>
+			</a>
+			<button id="close-popup-1" class="grow btn btn-outline-primary mx-1">Cancel</button>
+		</div>
+	</div>
 
 <script>
 console.log("hellow")
 const popup1 = document.getElementById("popup-1")
 const openPopup1 = document.getElementById("open-popup-1")
 const closePopup1 = document.getElementById('close-popup-1')
-
+const postSec = document.getElementById('post-section')
 openPopup1.addEventListener('click', () => {
 	popup1.style.display = "block";
+	postSec.hidden = true;
 })
-
 closePopup1.addEventListener('click', () => {
 	popup1.style.display = "none";
+	postSec.hidden = false;
 })
 </script>
 {% endblock %}

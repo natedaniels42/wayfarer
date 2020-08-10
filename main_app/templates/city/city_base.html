@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
 <section class="my-4">
-    <div class="container">
+    <div class="container col-md-offset-2 col-md-8">
 
       <div>
-        <h5 class="pl-4">Click on a city to explore:</h5>
         {% for city in cities %}
           <a href="/city/{{city.id}}">
-            <div class="box row p-1 m-3">
-              <img class="m-3" src="{{ city.image }}" width="240" height="80">
+            <div class="grow box row p-1 m-3">
+              <img class="m-3 landscape" src="{{ city.image }}" width="240" height="80">
                 <h3 class="cityName m-3 pt-4">{{city.name}}</h3>
             </div>
           </a>
