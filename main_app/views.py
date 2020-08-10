@@ -12,11 +12,11 @@ def home(request):
 
 def city_index(request):
     cities = City.objects.all()
-    return render(request, 'city/index.html', {'cities': cities})
+    return render(request, 'city/city_base.html', {'cities': cities})
 
 def city_detail(request, city_id):
     city = City.objects.get(id = city_id)
-    posts = Post.objects.filter(city_id = city.id)
+    posts = Post.objects.filter(city_id = city.id).order_by('-id')
     context = {
         'city': city,
         'posts': posts,
@@ -25,18 +25,6 @@ def city_detail(request, city_id):
 
 def city_post(request):
     return render(request, 'city/post.html')
-
-def login(request, user):
-    form = AuthenticationForm()
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            login(request, user)
-            return redirect('/profile/')
-    else:
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form': form})
 
 def signup(request):
     error_message = 'Error'
@@ -51,10 +39,11 @@ def signup(request):
         print(form)
         if form.is_valid():
             user = form.save()
+            login(request, user)
             profile = form2.save(commit=False)
             profile.user_id = user.id
             profile.save()
-            return redirect('/accounts/login/', {'profile': profile} )
+            return redirect('/profile/', {'profile': profile} )
         else:
             global error 
             error = 'User account already exists'
@@ -93,7 +82,7 @@ def post_new(request, city_id):
             post = form.save(commit=False)
             post.city_id = city_id
             post.save()
-            return redirect('/city/')
+            return redirect('city_detail', city.id)
         else:
             return redirect('/post/new')
     else:
@@ -128,5 +117,7 @@ def post_detail(request, post_id):
 
 @login_required
 def post_delete(request, post_id):
-    Post.objects.get(id=post_id).delete()
-    return redirect('home')
+    post = Post.objects.get(id=post_id)
+    city_id = post.city.id
+    post.delete()
+    return redirect('city_detail', city_id)
