@@ -4,8 +4,8 @@
 <section>
   <div class="container col-md-offset-3 col-md-6">
     
-      <h1 class="text-center mt-4 mb-3">Sign up</h1>
-      <div class="box p-4">
+      <h1 class="text-center m-5">Sign up</h1>
+      <div class="box py-3 px-5">
 
         {% if error %}
         <p class="red-text">{{ error}}</p>
@@ -36,15 +36,13 @@
             <label for="city">City</label>
             <input type="text" class="form-control" name="city" placeholder="City">
           </div>
-          {% comment %}
           <div class="form-group">
-            <label for="image">Select a Profile Picture:</label>
+            <label for="image">Profile Picture:</label>
             <input type="hidden" role="uploadcare-uploader" name="image"/>
           </div>
-          {% endcomment %}
           <input type="hidden" name="image" value="https://picsum.photos/80">
           <div class="text-center">
-            <button type="submit" class="btn btn-primary" value="signup">Sign Up!</button>
+            <button type="submit" class="grow btn btn-outline-primary" value="signup">Sign Up!</button>
           </div>
       </form>
     </div>
