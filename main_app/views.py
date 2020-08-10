@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from .forms import ProfileForm, PostForm
 from .models import Profile, Post, City
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 def home(request):
@@ -16,7 +19,7 @@ def city_index(request):
 
 def city_detail(request, city_id):
     city = City.objects.get(id = city_id)
-    posts = Post.objects.filter(city_id = city.id)
+    posts = Post.objects.filter(city_id = city.id).order_by('-id')
     context = {
         'city': city,
         'posts': posts,
@@ -25,18 +28,6 @@ def city_detail(request, city_id):
 
 def city_post(request):
     return render(request, 'city/post.html')
-
-def login(request, user):
-    form = AuthenticationForm()
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            login(request, user)
-            return redirect('/profile/')
-    else:
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form': form})
 
 def signup(request):
     error_message = 'Error'
@@ -51,10 +42,18 @@ def signup(request):
         print(form)
         if form.is_valid():
             user = form.save()
+            login(request, user)
             profile = form2.save(commit=False)
             profile.user_id = user.id
             profile.save()
-            return redirect('/accounts/login/', {'profile': profile} )
+            send_mail(
+                'Welcome to Wayfarer',
+                'Welcome to Wayfarer. You email and profile have been confirmed.  Many journies await you!  There is nothing more that you need to do at the time. Build your profile and begin sharing you stories!  -Wayfarer Team',
+                settings.EMAIL_HOST_USER,
+                [profile.email],
+                fail_silently=False,
+            )
+            return redirect('/profile/', {'profile': profile} )
         else:
             global error 
             error = 'User account already exists'

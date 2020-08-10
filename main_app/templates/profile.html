@@ -2,7 +2,7 @@
 {% block content %}
 
   <section class="my-4">
-    <div class="container col-md-offset-4 col-md-4">
+    <div class="container col-md-offset-3 col-md-6">
 
       <div class="box">
         <h2 class="text-center pt-2">{{ profile.name }}</h2>
@@ -12,22 +12,34 @@
         </div>
         <p class="text-center"><small>Member since: {{ profile.user.date_joined }}</small></p>
         <div class="text-center">
-          <a  href="{% url 'update_profile' %}">
-            <button class="btn btn-primary mb-3">Update</button>
+          <a href="{% url 'update_profile' %}">
+            <button class="grow btn btn-outline-primary my-3">Update</button>
           </a>
         </div>
       </div>
     </div>
-    <div class="row">
-      <h3>Posts</h3>
+
+    <div class="container col-md-offset-3 col-md-6 mt-4">
+      <div class="row mx-2">
+        <h3>Posts</h3>
+      </div>
+      {% if posts.count %}
+      {% for post in posts %}
+      <div class="grow box py-3 mb-3">
+        <a href="/post/{{ post.id }}">
+          <div class="mx-3 mb-1">
+            <span class="badge badge-pill badge-dark px-3">{{ post.city.name}}</span>
+          </div>
+            <h5 class="px-3">{{ post.title }}</h4>
+          <p class="px-3 mb-0"><small>{{post.content}}</small></p>
+        </a> 
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>No Posts Yet</p>
+      {% endif %}
+      
     </div>
-   {% for post in posts %}
-    <div class="box row p-1 m-3">
-      <a href="/post/{{ post.id }}">{{ post.title }}</a>
-    </div>
-    {% endfor %}
-  </div>
-    
 </section>
       
 

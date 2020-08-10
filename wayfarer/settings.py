@@ -131,4 +131,9 @@ UPLOADCARE = {
     'secret': 'de7a07485df374095f5d',
 }
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'chasesheafftest@gmail.com'
+EMAIL_HOST_PASSWORD = 'Pizza2000'
+EMAIL_PORT = 587
 django_on_heroku.settings(locals())

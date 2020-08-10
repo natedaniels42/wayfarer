@@ -8,6 +8,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
     image = models.CharField(max_length=250, default='https://picsum.photos/80')
     
     def __str__(self):
