@@ -12,6 +12,9 @@
 		<div class="box text-center p-3">
 			
 			<img src="{{ profile.image }}" width="100" height="100">
+			<div class="mx-3 mb-1">
+				<span class="badge badge-pill badge-dark px-3">{{ post.city.name}}</span>
+			</div>
 			<h2>{{ post.title }}</h2>
 			<p>{{ post.content }}</p>
 			<p><small>Created by: {{ profile.name }}</small></p>
