@@ -17,7 +17,7 @@
   <h4>{{ city.country }}</h4>
   <div class="add-post">
     <a href="{% url 'post_new' city.id %}">
-      <button class="btn btn-primary">New Post</button>
+      <button class="grow btn btn-outline-primary">New Post</button>
     </a>
   </div>
 </div>
@@ -28,7 +28,7 @@
     {% if posts.count %}
     {% for post in posts %}
     <a href="{% url 'post_detail' post.id %}">
-      <div class="box row p-1 m-3">
+      <div class="grow box row p-1 m-3">
         <img  class="m-3" src="{{ post.profile.image }}" width="80" height="80">
         <div class="col">
           <h5 class="cityName my-3">{{post.title}}</h5>

@@ -8,8 +8,8 @@
       <div>
         {% for city in cities %}
           <a href="/city/{{city.id}}">
-            <div class="box row p-1 m-3">
-              <img class="m-3" src="{{ city.image }}" width="240" height="80">
+            <div class="grow box row p-1 m-3">
+              <img class="m-3 landscape" src="{{ city.image }}" width="240" height="80">
                 <h3 class="cityName m-3 pt-4">{{city.name}}</h3>
             </div>
           </a>

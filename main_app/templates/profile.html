@@ -13,7 +13,7 @@
         <p class="text-center"><small>Member since: {{ profile.user.date_joined }}</small></p>
         <div class="text-center">
           <a href="{% url 'update_profile' %}">
-            <button class="btn btn-primary my-3">Update</button>
+            <button class="grow btn btn-outline-primary my-3">Update</button>
           </a>
         </div>
       </div>
@@ -25,10 +25,13 @@
       </div>
       {% if posts.count %}
       {% for post in posts %}
-      <div class="box py-3 mb-3">
+      <div class="grow box py-3 mb-3">
         <a href="/post/{{ post.id }}">
-          <h5 class="px-3">{{ post.title }}</h4>
-          <p class="px-3"><small>{{post.content}}</small></p>
+          <div class="mx-3 mb-1">
+            <span class="badge badge-pill badge-dark px-3">{{ post.city.name}}</span>
+          </div>
+            <h5 class="px-3">{{ post.title }}</h4>
+          <p class="px-3 mb-0"><small>{{post.content}}</small></p>
         </a> 
       </div>
       {% endfor %}

@@ -12,6 +12,7 @@ main {
 .box {
     background-color: rgba(0,124,255, 0.2);
     border-radius: 10px;
+    
 }
 
  /* Buttons */
@@ -21,10 +22,10 @@ main {
 .grow:hover {
     transform: scale(1.2);
 }
-
+s
 /*-------- Fonts ------------*/
 h1 {
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: italic;
     font-weight: bold;
 }
@@ -103,6 +104,9 @@ header {
     width: 600px;
     height: 200px;
     overflow: hidden;
+}
+.landscape {
+    border-radius: 10px;
 }
 #red {
     color: red;
