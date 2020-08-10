@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
 <section class="my-4">
-    <div class="container">
+    <div class="container col-md-offset-2 col-md-8">
 
       <div>
-        <h5 class="pl-4">Click on a city to explore:</h5>
         {% for city in cities %}
           <a href="/city/{{city.id}}">
             <div class="box row p-1 m-3">

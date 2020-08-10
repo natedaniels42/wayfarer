@@ -10,10 +10,11 @@ main {
 }
 
 .box {
-    background-color: rgba(46,139,87,0.2);
+    background-color: rgba(0,124,255, 0.2);
     border-radius: 10px;
 }
-/*------- Buttons -----------*/
+
+ /* Buttons */
 .grow {
     transition: all .2s ease-in-out;
 }
@@ -21,13 +22,6 @@ main {
     transform: scale(1.2);
 }
 
-#addCityBtn {
-    border-radius: 50%;
-    background-color: seagreen;
-    color: white;
-    width: 50px;
-    height: 50px;
-}
 /*-------- Fonts ------------*/
 h1 {
     font-family: PT Sans;
@@ -52,12 +46,6 @@ a {
     color: black;
 }
 
-.display-4 {
-    font-family: PT Sans;
-    font-style: italic;
-    color: white;
-}
-
 /* ---------Nav Bar---------- */
 header {
     background-color: white;
@@ -75,11 +63,10 @@ header {
 /*--------- Popup Window --------*/
 #popup-1 {
 	display: none;
-	background-color: rgba(0,0,0,0.5);
-	position: absolute;
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
 	height: 100vh;
     width: 100%;
-    
 }
 
 .popup-content {
@@ -88,8 +75,8 @@ header {
 	margin: 0 auto;
 	background-color: white;
 	width: 400px;
-    top: 5vh;
-    
+    top: 10vh;
+    border-radius: 20px;
 }
 
 /*--------- Image Sizes --------*/
@@ -117,15 +104,6 @@ header {
     height: 200px;
     overflow: hidden;
 }
-.carousel .item {
-    height: 200px;
-  }
-  
-.item img {
-    background-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 200px;
+#red {
+    color: red;
 }
-

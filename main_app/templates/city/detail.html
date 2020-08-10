@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
-{% block detail %}
-
-
-    
-
+{% block content %}
 
 <section class="hero">
   <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active item">
+      <div class="carousel-item active">
           <img src="{{city.image}}" class="d-block w-100" alt="...">
       </div>
     </div>
   </div>
 </section>
+
+
 <div class="text-center">
   <h1>{{ city.name }}</h1>
   <h4>{{ city.country }}</h4>
@@ -23,21 +21,27 @@
     </a>
   </div>
 </div>
-{% if posts.count %}
-{% for post in posts %}
-<div class="box row p-1 m-3">
-  <img  class="m-3" src="{{ post.profile.image }}" width="80" height="80">
+
+
+<section class="container">
+  <div class="container col-md-offset-2 col-md-8">
+    {% if posts.count %}
+    {% for post in posts %}
     <a href="{% url 'post_detail' post.id %}">
-    <div class="col">
-      <h5 class="cityName my-3">{{post.title}}</h5>
-      <p>{{post.content}}</p>
-    </div>
-  </a>
-</div>
-{% endfor %}
-{% else %}
-<p>No Posts Yet</p>
-{% endif %}
+      <div class="box row p-1 m-3">
+        <img  class="m-3" src="{{ post.profile.image }}" width="80" height="80">
+        <div class="col">
+          <h5 class="cityName my-3">{{post.title}}</h5>
+          <p>{{post.content}}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    <p>No Posts Yet</p>
+    {% endif %}
+  </div>
+</section>
 
 
 {% endblock %}

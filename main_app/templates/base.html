@@ -7,13 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wayfarer</title> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-    <link href=“https://fonts.googleapis.com/css2?family=PT+Serif&display=swap” rel=“stylesheet”>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script>
         UPLOADCARE_PUBLIC_KEY = '2b99c12cdd0c28431a29';
     </script>
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script defer src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
     </head>
 <body>
     <header>
@@ -57,8 +56,6 @@
         {% block content %}
         {% endblock %}
 
-        {% block detail %}
-        {% endblock %}
 
     </main>
     <footer>
