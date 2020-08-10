@@ -21,11 +21,15 @@
     <div class="row">
       <h3>Posts</h3>
     </div>
-   {% for post in posts %}
+    {% if posts.count %}
+    {% for post in posts %}
     <div class="box row p-1 m-3">
-      <a href="/post/{{ post.id }}">{{ post.title }}</a>
+      <a href="/post/{{ post.id }}">{{ post.title }}</a> 
     </div>
     {% endfor %}
+    {% else %}
+    <p>No Posts Yet</p>
+    {% endif %}
   </div>
     
 </section>
