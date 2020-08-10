@@ -5,7 +5,8 @@
 	<div class="popup-content">
 		<h1>Popup Title</h1>
 		<p>Are you sure you want to delete this post?</p>
-        <button href="{% url 'post_delete' post.id %}" id="close-popup-1">Delete</button>
+		<button><a href="{% url 'post_delete' post.id %}">Delete</a></button>
+		<button id="close-popup-1">Cancel</button>
 	</div>
 </div>
 
@@ -17,4 +18,18 @@
 <a id="open-popup-1">Delete</a>
 <a href="{% url 'post_edit' post.id %}">Edit</a>
 
+<script>
+console.log("hellow")
+const popup1 = document.getElementById("popup-1")
+const openPopup1 = document.getElementById("open-popup-1")
+const closePopup1 = document.getElementById('close-popup-1')
+
+openPopup1.addEventListener('click', () => {
+	popup1.style.display = "block";
+})
+
+closePopup1.addEventListener('click', () => {
+	popup1.style.display = "none";
+})
+</script>
 {% endblock %}
