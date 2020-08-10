@@ -71,7 +71,7 @@ def update(request):
             profile = form.save()
             return redirect('profile')
         else:
-            return redirect('home')
+            return redirect('update')
     else:
         form = ProfileForm(instance=profile)
         return render(request, 'registration/update.html', {'form': form, 'profile': profile})
