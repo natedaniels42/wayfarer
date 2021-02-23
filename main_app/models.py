@@ -9,7 +9,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
-    image = models.CharField(max_length=250, default='https://picsum.photos/80')
+    image = models.CharField(max_length=250)
     
     def __str__(self):
         return self.name
