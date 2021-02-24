@@ -22,7 +22,7 @@ main {
 .grow:hover {
     transform: scale(1.2);
 }
-s
+
 /*-------- Fonts ------------*/
 h1 {
     font-family: 'PT Sans', sans-serif;
@@ -107,6 +107,7 @@ header {
 }
 .landscape {
     border-radius: 10px;
+    object-fit: cover;
 }
 #red {
     color: red;
@@ -123,3 +124,6 @@ header {
     border-radius: 10px;
 }
 
+.nav-link {
+    color: purple;
+}
