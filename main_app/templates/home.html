@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <section class="hero">
   <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-          <img src="https://s3-eu-west-1.amazonaws.com/uploads.services.internations.org/files/2020/06/16152110/Moving-to-Paris-2020-1200x400.jpeg" height="500px" class="d-block w-100" alt="...">
+          <img src="{% static 'cityImages/paris.jpeg' %}" height="500px" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://blog-www.pods.com/wp-content/uploads/2019/04/MG_1_1_New_York_City-1.jpg" height="500px" class="d-block w-100" alt="...">
+        <img src="{% static 'cityImages/new-york.jpg' %}" height="500px" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://cdn.choosechicago.com/uploads/2019/05/loop-1800x900.jpg" height="500px" class="d-block w-100" alt="...">
+        <img src="{% static 'cityImages/chicago.jpg' %}" height="500px" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://katsgoneglobal.com/wp-content/uploads/2018/11/First-timers-guide-to-London.jpg" height="500px" class="d-block w-100" alt="...">
+        <img src="{% static 'cityImages/london.jpg' %}" height="500px" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://gameglobal.events/wp-content/uploads/2018/06/seattle-2018-1200x400-new.jpg" height="500px" class="d-block w-100" alt="...">
+        <img src="{% static 'cityImages/seattle.jpg' %}" height="500px" class="d-block w-100" alt="...">
       </div>
     </div>
   </div>
